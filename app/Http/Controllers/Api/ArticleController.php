@@ -40,5 +40,21 @@ class ArticleController extends Controller
         $article->delete();
         return response()->json(['message'=>'Article was deleted successfuly!'],200);
     }
+    public function update(Article $article, Request $request){
+        if($article->user_id !== auth()->user()->id){
+           return response()->json(['message'=>'You can not update this article !'], 403);
+    }
 
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'body' => 'required|string'
+    ]);
+
+    $article->update([
+        'title' => $request->title,
+        'body' => $request->body,
+    ]);
+
+    return response()->json($article, 200);
+}
 }

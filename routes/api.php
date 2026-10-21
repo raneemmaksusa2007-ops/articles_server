@@ -11,6 +11,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/articles',[ArticleController::class,'index']);
 Route::post('/articles',[ArticleController::class,'store'])->middleware('auth:sanctum');
 Route::get('/articles/{article}',[ArticleController::class,'show']);
+Route::put('/update/{article}',[ArticleController::class,'update'])->middleware('auth:sanctum');
 Route::delete('/articles/{article}',[ArticleController::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
